@@ -747,9 +747,11 @@ const recipeName = 'recipes-table'
 
 const resourcesHeader = document.querySelector(`.${resourcesName}-header`);
 const resourcesBody = document.querySelector(`.${resourcesName}-body`);
+const resourcesForm = document.querySelector(`.resources-gathered`);
 
 const recipeHeader = document.querySelector(`.${recipeName}-header`);
 const recipeBody = document.querySelector(`.${recipeName}-body`);
+const recipeForm = document.querySelector(`.recipes-crafted`);
 
 document.addEventListener("DOMContentLoaded", function () {
     //prevent attempt to submit form to server
@@ -758,9 +760,8 @@ document.addEventListener("DOMContentLoaded", function () {
     populateTable(resourcesHeader, resourcesBody, requiredTotals);
     populateTable(recipeHeader, recipeBody, recipeList);
     // generate forms
-    populateForm(requiredTotals);
-    populateForm(recipeList)
-    createForm
+    populateForm(requiredTotals, resourcesForm, 'number');
+    populateForm(recipeList, recipeForm, 'checkbox')
     console.log("Page Loaded")
 })
 
@@ -775,9 +776,9 @@ function populateTable(tableHeader, tableBody, data) {
     const headers = Object.keys(data[0]);
     //iterate over property names to generate table header
     headers.forEach((key) => {
-      let th = document.createElement('th')
-      th.innerHTML = key
-      tr.appendChild(th);
+        let th = document.createElement('th')
+        th.innerHTML = key
+        tr.appendChild(th);
     })
     //insert the created row as the table header
     tableHeader.appendChild(tr);
@@ -785,79 +786,78 @@ function populateTable(tableHeader, tableBody, data) {
     //insert data into table body
     tableBody.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
-      //create a new row
-      tr = document.createElement('tr');
-      //iterate over data
-      headers.forEach((key) => {
-        //create table data inside of row
-        let td = document.createElement('td');
-        //if the value is an object, loop through and create sub-table
-        if (typeof data[i][key] === 'object') {
-          let subTable = document.createElement('table');
-          let subTableHeader = document.createElement('thead');
-          let subTableBody = document.createElement('tbody');
+        //create a new row
+        tr = document.createElement('tr');
+        //iterate over data
+        headers.forEach((key) => {
+            //create table data inside of row
+            let td = document.createElement('td');
+            //if the value is an object, loop through and create sub-table
+            if (typeof data[i][key] === 'object') {
+                let subTable = document.createElement('table');
+                let subTableHeader = document.createElement('thead');
+                let subTableBody = document.createElement('tbody');
 
-          //generate the headers by looping through object property names
-          let subTableHeaders = Object.keys(data[i][key][0]);
-  
-          //create the sub-table header row
-          let subTableHeaderRow = document.createElement('tr');
-          subTableHeaders.forEach((subTableHeaderKey) => {
-            let subTableHeaderCell = document.createElement('th');
-            subTableHeaderCell.innerHTML = subTableHeaderKey;
-            subTableHeaderRow.appendChild(subTableHeaderCell);
-          });
-          //insert the created row as the sub-table header
-          subTableHeader.appendChild(subTableHeaderRow);
-  
-          //insert sub-table data
-          for (let j = 0; j < data[i][key].length; j++) {
-            let subTableRow = document.createElement('tr');
-            subTableHeaders.forEach((subTableHeaderKey) => {
-              let subTableDataCell = document.createElement('td');
-              subTableDataCell.innerHTML = data[i][key][j][subTableHeaderKey];
-              subTableRow.appendChild(subTableDataCell);
-            });
-            subTableBody.appendChild(subTableRow);
-          }
-          subTable.appendChild(subTableHeader);
-          subTable.appendChild(subTableBody);
-          td.appendChild(subTable);
-        } else {
-          //set table data to current value set in loop
-          td.innerHTML = data[i][key];
-        }
-        //add data to row
-        tr.appendChild(td);
-      });
-      tableBody.appendChild(tr);
+                //generate the headers by looping through object property names
+                let subTableHeaders = Object.keys(data[i][key][0]);
+
+                //create the sub-table header row
+                let subTableHeaderRow = document.createElement('tr');
+                subTableHeaders.forEach((subTableHeaderKey) => {
+                    let subTableHeaderCell = document.createElement('th');
+                    subTableHeaderCell.innerHTML = subTableHeaderKey;
+                    subTableHeaderRow.appendChild(subTableHeaderCell);
+                });
+                //insert the created row as the sub-table header
+                subTableHeader.appendChild(subTableHeaderRow);
+
+                //insert sub-table data
+                for (let j = 0; j < data[i][key].length; j++) {
+                    let subTableRow = document.createElement('tr');
+                    subTableHeaders.forEach((subTableHeaderKey) => {
+                        let subTableDataCell = document.createElement('td');
+                        subTableDataCell.innerHTML = data[i][key][j][subTableHeaderKey];
+                        subTableRow.appendChild(subTableDataCell);
+                    });
+                    subTableBody.appendChild(subTableRow);
+                }
+                subTable.appendChild(subTableHeader);
+                subTable.appendChild(subTableBody);
+                td.appendChild(subTable);
+            } else {
+                //set table data to current value set in loop
+                td.innerHTML = data[i][key];
+            }
+            //add data to row
+            tr.appendChild(td);
+        });
+        tableBody.appendChild(tr);
     }
-  }
-  
-  
+}
 
-function populateForm(data) {
-    const form = document.createElement('form')
-    form.setAttribute('class','resource-form')
-    
+
+
+function populateForm(data, formName, entryType) {
+    //const form = document.createElement('form')    
     //loop through data to dynamically generate the form
     data.forEach((material) => {
-        
+
         //create field label of form
         const label = document.createElement('label');
-        label.innerText = material.name + ':';
+        label.innerText = material.name;
 
         //create input of form
         const input = document.createElement('input');
-        input.setAttribute('type', 'number');
+        input.setAttribute('type', entryType);
         input.setAttribute('label', material.name);
-        input.setAttribute('min', '0');
-
+        if (entryType == 'number') {
+            input.setAttribute('min', '0');
+        }
         //append each to the form
-        form.appendChild(label);
-        form.appendChild(input);
+        formName.appendChild(label);
+        formName.appendChild(input);
     });
 
-    document.body.appendChild(form);
+    //formName.appendChild(formName);
 
 }
