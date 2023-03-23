@@ -1,38 +1,38 @@
 const requiredTotals = [
-    {'name':"Lucid Shard",'total':35},
-    {'name':"Lucid Gem",'total':13},
-    {'name':"Lucid Crystal",'total':9},
-    {'name':"Power Shard",'total':13},
-    {'name':"Power Gem",'total':11},
-    {'name':"Power Crystal",'total':7},
-    {'name':"Bright Shard",'total':13},
-    {'name':"Bright Gem",'total':8},
-    {'name':"Bright Crystal",'total':4},
-    {'name':"Spirit Shard",'total':13},
-    {'name':"Spirit Gem",'total': 7},
-    {'name':"Shiny Crystal",'total':3},
-    {'name':"Blaze Shard",'total':12},
-    {'name':"Blaze Gem",'total':10},
-    {'name':"Frost Shard",'total':10},
-    {'name':"Frost Gem",'total':10},
-    {'name':"Thunder Shard",'total':12},
-    {'name':"Thunder Gem",'total':15},
-    {'name':"Mythril Shard",'total':12},
-    {'name':"Mythril",'total':13},
-    {'name':"Mystery Goo",'total':14},
-    {'name':"Gale",'total':6},
-    {'name':"Orichalcum",'total':19},
-    {'name':"Stormy Stone",'total':4},
-    {'name':"Fury Stone",'total':5},
-    {'name':"Power Stone",'total':5},
-    {'name':"Lightning Stone",'total':5},
-    {'name':"Energy Stone",'total':6},
-    {'name':"Dazzling Stone",'total':6},
-    {'name':"Blazing Stone",'total':7},
-    {'name':"Frost Stone",'total':7},
-    {'name':"Mythril Stone",'total':8},
-    {'name':"Serenity Power",'total':7},
-    {'name':"Dark Matter",'total':14},
+    { 'name': "Lucid Shard", 'total': 35 },
+    { 'name': "Lucid Gem", 'total': 13 },
+    { 'name': "Lucid Crystal", 'total': 9 },
+    { 'name': "Power Shard", 'total': 13 },
+    { 'name': "Power Gem", 'total': 11 },
+    { 'name': "Power Crystal", 'total': 7 },
+    { 'name': "Bright Shard", 'total': 13 },
+    { 'name': "Bright Gem", 'total': 8 },
+    { 'name': "Bright Crystal", 'total': 4 },
+    { 'name': "Spirit Shard", 'total': 13 },
+    { 'name': "Spirit Gem", 'total': 7 },
+    { 'name': "Shiny Crystal", 'total': 3 },
+    { 'name': "Blaze Shard", 'total': 12 },
+    { 'name': "Blaze Gem", 'total': 10 },
+    { 'name': "Frost Shard", 'total': 10 },
+    { 'name': "Frost Gem", 'total': 10 },
+    { 'name': "Thunder Shard", 'total': 12 },
+    { 'name': "Thunder Gem", 'total': 15 },
+    { 'name': "Mythril Shard", 'total': 12 },
+    { 'name': "Mythril", 'total': 13 },
+    { 'name': "Mystery Goo", 'total': 14 },
+    { 'name': "Gale", 'total': 6 },
+    { 'name': "Orichalcum", 'total': 19 },
+    { 'name': "Stormy Stone", 'total': 4 },
+    { 'name': "Fury Stone", 'total': 5 },
+    { 'name': "Power Stone", 'total': 5 },
+    { 'name': "Lightning Stone", 'total': 5 },
+    { 'name': "Energy Stone", 'total': 6 },
+    { 'name': "Dazzling Stone", 'total': 6 },
+    { 'name': "Blazing Stone", 'total': 7 },
+    { 'name': "Frost Stone", 'total': 7 },
+    { 'name': "Mythril Stone", 'total': 8 },
+    { 'name': "Serenity Power", 'total': 7 },
+    { 'name': "Dark Matter", 'total': 14 },
 ]
 
 const recipeList = [
@@ -742,19 +742,20 @@ const recipeList = [
     }
 ]
 /*Result Data*/
-const dataName = 'required-resources-table'
+const dataName = 'resource-required-table'
 
-const form = document.querySelector('resource-form')
-const table = document.querySelector(`.resource-required-table`);
-const header = document.querySelector(`.resource-required-table-header`);
-const body = document.querySelector(`.resource-required-table-body`);
+//const form = document.querySelector('resource-form')
+//const table = document.querySelector(`.${dataName}`);
+const ingredientsHeader = document.querySelector(`.${dataName}-header`);
+const ingredientsBody = document.querySelector(`.${dataName}-body`);
 
 document.addEventListener("DOMContentLoaded", function () {
     //prevent attempt to submit form to server
     console.log("Page Loading")
     //populate tables
-    populateTable(header, body, requiredTotals);
+    populateTable(ingredientsHeader, ingedientsBody, requiredTotals);
     //populateTable(header, body, recipeList);
+    createResourceForm(requiredTotals)
     console.log("Page Loaded")
 })
 
@@ -792,4 +793,30 @@ function populateTable(tableHeader, tableBody, data) {
         });
         tableBody.appendChild(tr);
     }
+}
+
+function createResourceForm(data) {
+    const form = document.createElement('form')
+    form.setAttribute('class','resource-form')
+    
+    //loop through data to dynamically generate the form
+    data.forEach((material) => {
+        
+        //create field label of form
+        const label = document.createElement('label');
+        label.innerText = material.name + ':';
+
+        //create input of form
+        const input = document.createElement('input');
+        input.setAttribute('type', 'number');
+        input.setAttribute('label', material.name);
+        input.setAttribute('min', '0');
+
+        //append each to the form
+        form.appendChild(label);
+        form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+
 }
