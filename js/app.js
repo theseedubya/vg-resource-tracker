@@ -742,19 +742,22 @@ const recipeList = [
     }
 ]
 /*Result Data*/
-const dataName = 'resource-required-table'
+const resourcesName = 'resource-required-table'
+const recipeName = 'recipes-table'
 
-//const form = document.querySelector('resource-form')
-//const table = document.querySelector(`.${dataName}`);
-const ingredientsHeader = document.querySelector(`.${dataName}-header`);
-const ingredientsBody = document.querySelector(`.${dataName}-body`);
+const resourcesHeader = document.querySelector(`.${resourcesName}-header`);
+const resourcesBody = document.querySelector(`.${resourcesName}-body`);
+
+const recipeHeader = document.querySelector(`.${recipeName}-header`);
+const recipeBody = document.querySelector(`.${recipeName}-body`);
 
 document.addEventListener("DOMContentLoaded", function () {
     //prevent attempt to submit form to server
     console.log("Page Loading")
     //populate tables
-    populateTable(ingredientsHeader, ingedientsBody, requiredTotals);
-    //populateTable(header, body, recipeList);
+    populateTable(resourcesHeader, resourcesBody, requiredTotals);
+    populateTable(recipeHeader, recipeBody, recipeList);
+    // generate form
     createResourceForm(requiredTotals)
     console.log("Page Loaded")
 })
@@ -767,33 +770,44 @@ function populateTable(tableHeader, tableBody, data) {
     //create a new row
     let tr = document.createElement('tr');
     //set headers to keys in data
+    console.log(Object.keys(data[0]))
     const headers = Object.keys(data[0]);
     //iterate over headers to generate table header
     headers.forEach((key) => {
-        let th = document.createElement('th')
-        th.innerHTML = key
-        tr.appendChild(th);
-    })
+      let th = document.createElement('th');
+      th.innerHTML = key;
+      tr.appendChild(th);
+    });
     tableHeader.appendChild(tr);
     //insert data into table body
     tableBody.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
-        //create a new row
-        tr = document.createElement('tr');
-        //iterate over data
-        headers.forEach((key) => {
-            //create table data inside of row
-            let td = document.createElement('td');
-            //add header as a class for CSS
-            td.classList.add(key)
-            //set table data to current value set in loop
-            td.innerHTML = data[i][key]
-            //add data to row
-            tr.appendChild(td);
-        });
-        tableBody.appendChild(tr);
+      //create a new row
+      tr = document.createElement('tr');
+      //iterate over data
+      headers.forEach((key) => {
+        //create table data inside of row
+        let td = document.createElement('td');
+        //add header as a class for CSS
+        td.classList.add(key);
+        if (typeof data[i][key] === 'object') {
+          // if the current value is an object, recursively call the function to add its properties as separate rows
+          let subTableHeader = document.createElement('thead');
+          let subTableBody = document.createElement('tbody');
+          populateTable(subTableHeader, subTableBody, [data[i][key]]);
+         // td.appendChild(subTableHeader);
+          td.appendChild(subTableBody);
+        } else {
+          //set table data to current value set in loop
+          td.innerHTML = data[i][key];
+        }
+        //add data to row
+        tr.appendChild(td);
+      });
+      tableBody.appendChild(tr);
     }
-}
+  }
+  
 
 function createResourceForm(data) {
     const form = document.createElement('form')
