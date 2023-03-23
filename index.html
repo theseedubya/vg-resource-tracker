@@ -11,35 +11,48 @@
 <body>
     <h1>Resource Tracker</h1>
     <h3 class="gameTitle">Kingdom Hearts Final Mix</h3>
-    <h5 class="resourseType">Synthesis Materials</h5>
-    <table class="resource-required-table">
-        <thead class = "resource-required-table-header">
-            <tr>
-                <th title="ingredientName">name</th>
-                <th title="ingredientTotalRequired">total</th>
-            </tr>
-        </thead>
-        <tbody class = "resource-required-table-body">
-            <tr>
-                <td>Lucid Shard</td>
-                <td align="right">0</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="recipes-table">
-        <thead class = "recipes-table-header">
-            <tr>
-                <th title="ingredientName">name</th>
-                <th title="ingredientTotalRequired">total</th>
-            </tr>
-        </thead>
-        <tbody class = "recipes-table-body">
-            <tr>
-                <td>Lucid Shard</td>
-                <td align="right">0</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="requiredResources">
+        <h5>Synthesis Materials</h5>
+        <table class="resource-required-table">
+            <thead class="resource-required-table-header">
+                <tr>
+                    <th title="ingredientName">name</th>
+                    <th title="ingredientTotalRequired">total</th>
+                </tr>
+            </thead>
+            <tbody class="resource-required-table-body">
+                <tr>
+                    <td>Lucid Shard</td>
+                    <td align="right">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="recipeList">
+        <h5>Recipe List</h5>
+        <table class="recipes-table">
+            <thead class="recipes-table-header">
+                <tr>
+                    <th title="ingredientName">name</th>
+                    <th title="ingredientTotalRequired">total</th>
+                </tr>
+            </thead>
+            <tbody class="recipes-table-body">
+                <tr>
+                    <td>Lucid Shard</td>
+                    <td align="right">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="resource-form">
+        <h5>Resources Gathered</h5>
+        <form action="" class="resources-gathered user-input"></form>
+    </div>
+    <div class="recipe-form">
+        <h5>Created Recipes</h5>
+        <form action="" class="recipes-crafted user-input"></form>
+    </div>
     <script src="js/app.js"></script>
 </body>
 
