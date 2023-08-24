@@ -744,17 +744,21 @@ const recipeList = [
 
 
 addEventListener("submit", (event) => {
-    event.preventDefault();
-    let recipeForm = event.target
-    let synthed = []
-   for(entry=0;entry< recipeForm.length;entry++){
-    if(recipeForm[entry].checked) {
-        synthed.push(recipeForm[entry].name)
-    }
-   }
-   console.log(synthed)
+  event.preventDefault();
+  let recipeForm = event.target
+  let completedRecipes = getCheckedBoxes(recipeForm)
+  console.log("completedRecipes: ",completedRecipes)
 });
 
+function getCheckedBoxes(formSubmit){
+  let synthed = []
+  for(entry=0;entry< formSubmit.length;entry++){
+  if(formSubmit[entry].checked) {
+      synthed.push(formSubmit[entry].name)
+    }
+   }
+  return synthed
+}
 
 function generateRecipeFormHTML(recipeArray){
     const formContent = []
