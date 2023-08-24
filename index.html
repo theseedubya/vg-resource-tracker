@@ -11,168 +11,79 @@
 <body>
     <h1>Resource Tracker</h1>
     <h3 class="gameTitle">Kingdom Hearts Final Mix</h3>
-    <h5 class="resourseType">Synthesis Materials</h5>
-    <table class="resource-required-table">
-        <thead class = "resource-required-table-header">
-            <tr>
-                <th title="ingredientName">name</th>
-                <th title="ingredientTotalRequired">total</th>
-            </tr>
-        </thead>
-        <tbody class = "resource-required-table-body">
-            <tr>
-                <td>Lucid Shard</td>
-                <td align="right">35</td>
-            </tr>
-            <tr>
-                <td>Lucid Gem</td>
-                <td align="right">13</td>
-            </tr>
-            <tr>
-                <td>Lucid Crystal</td>
-                <td align="right">9</td>
-            </tr>
-            <tr>
-                <td>Power Shard</td>
-                <td align="right">13</td>
-            </tr>
-            <tr>
-                <td>Power Gem</td>
-                <td align="right">11</td>
-            </tr>
-            <tr>
-                <td>Power Crystal</td>
-                <td align="right">7</td>
-            </tr>
-            <tr>
-                <td>Bright Shard</td>
-                <td align="right">13</td>
-            </tr>
-            <tr>
-                <td>Bright Gem</td>
-                <td align="right">8</td>
-            </tr>
-            <tr>
-                <td>Bright Crystal</td>
-                <td align="right">4</td>
-            </tr>
-            <tr>
-                <td>Spirit Shard</td>
-                <td align="right">13</td>
-            </tr>
-            <tr>
-                <td>Spirit Gem</td>
-                <td align="right">7</td>
-            </tr>
-            <tr>
-                <td>Shiny Crystal</td>
-                <td align="right">3</td>
-            </tr>
-            <tr>
-                <td>Blaze Shard</td>
-                <td align="right">12</td>
-            </tr>
-            <tr>
-                <td>Blaze Gem</td>
-                <td align="right">10</td>
-            </tr>
-            <tr>
-                <td>Frost Shard</td>
-                <td align="right">10</td>
-            </tr>
-            <tr>
-                <td>Frost Gem</td>
-                <td align="right">10</td>
-            </tr>
-            <tr>
-                <td>Thunder Shard</td>
-                <td align="right">12</td>
-            </tr>
-            <tr>
-                <td>Thunder Gem</td>
-                <td align="right">15</td>
-            </tr>
-            <tr>
-                <td>Mythril Shard</td>
-                <td align="right">12</td>
-            </tr>
-            <tr>
-                <td>Mythril</td>
-                <td align="right">13</td>
-            </tr>            
-            <tr>
-                <td>Mystery Goo</td>
-                <td align="right">14</td>
-            </tr>
-            <tr>
-                <td>Gale</td>
-                <td align="right">6</td>
-            </tr>
-            <tr>
-                <td>Orichalcum</td>
-                <td align="right">19</td>
-            </tr>
-            <tr>
-                <td>Stormy Stone</td>
-                <td align="right">4</td>
-            </tr>
-            <tr>
-                <td>Fury Stone</td>
-                <td align="right">5</td>
-            </tr>
-            <tr>
-                <td>Power Stone</td>
-                <td align="right">5</td>
-            </tr>
-            <tr>
-                <td>Lightning Stone</td>
-                <td align="right">5</td>
-            </tr>
-            <tr>
-                <td>Energy Stone</td>
-                <td align="right">6</td>
-            </tr>
-            <tr>
-                <td>Dazzling Stone</td>
-                <td align="right">6</td>
-            </tr>
-            <tr>
-                <td>Blazing Stone</td>
-                <td align="right">7</td>
-            </tr>
-            <tr>
-                <td>Frost Stone</td>
-                <td align="right">7</td>
-            </tr>
-            <tr>
-                <td>Mythril Stone</td>
-                <td align="right">8</td>
-            </tr>
-            <tr>
-                <td>Serenity Power</td>
-                <td align="right">8</td>
-            </tr>
-            <tr>
-                <td>Dark Matter</td>
-                <td align="right">14</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="recipes-table">
-        <thead class = "recipes-table-header">
-            <tr>
-                <th title="ingredientName">name</th>
-                <th title="ingredientTotalRequired">total</th>
-            </tr>
-        </thead>
-        <tbody class = "recipes-table-body">
-            <tr>
-                <td>Lucid Shard</td>
-                <td align="right">0</td>
-            </tr>
-        </tbody>
-    </table>
-    <script src="app.js"></script>
+    <div class="recipe-form-div">
+    <h5 class="resourceType">Synthesis Materials</h5>
+    <form action="submit" class="recipe-form" id="recipe-form">
+        <input type="checkbox" id="Mega Potion" name="Mega Potion" value="synthed">
+        <label for="Mega Potion">Mega Potion</label><br>
+        <input type="checkbox" id="Cottage" name="Cottage" value="synthed">
+        <label for="Cottage">Cottage</label><br>
+        <input type="checkbox" id="Energy Bangle" name="Energy Bangle" value="synthed">
+        <label for="Energy Bangle">Energy Bangle</label><br>
+        <input type="checkbox" id="Power Chain" name="Power Chain" value="synthed">    
+        <label for="Power Chain">Power Chain</label><br>
+        <input type="checkbox" id="Magic Armlet" name="Magic Armlet" value="synthed">  
+        <label for="Magic Armlet">Magic Armlet</label><br>
+        <input type="checkbox" id="EXP Earring" name="EXP Earring" value="synthed">    
+        <label for="EXP Earring">EXP Earring</label><br>
+        <input type="checkbox" id="Mega Ether" name="Mega Ether" value="synthed">      
+        <label for="Mega Ether">Mega Ether</label><br>
+        <input type="checkbox" id="Guard Earring" name="Guard Earring" value="synthed">
+        <label for="Guard Earring">Guard Earring</label><br>
+        <input type="checkbox" id="Angel Bangle" name="Angel Bangle" value="synthed">
+        <label for="Angel Bangle">Angel Bangle</label><br>
+        <input type="checkbox" id="Golem Chain" name="Golem Chain" value="synthed">
+        <label for="Golem Chain">Golem Chain</label><br>
+        <input type="checkbox" id="Rune Armlet" name="Rune Armlet" value="synthed">
+        <label for="Rune Armlet">Rune Armlet</label><br>
+        <input type="checkbox" id="Moogle Badge" name="Moogle Badge" value="synthed">
+        <label for="Moogle Badge">Moogle Badge</label><br>
+        <input type="checkbox" id="AP Up" name="AP Up" value="synthed">
+        <label for="AP Up">AP Up</label><br>
+        <input type="checkbox" id="Dark Ring" name="Dark Ring" value="synthed">
+        <label for="Dark Ring">Dark Ring</label><br>
+        <input type="checkbox" id="Master Earring" name="Master Earring" value="synthed">
+        <label for="Master Earring">Master Earring</label><br>
+        <input type="checkbox" id="Gaia Bangle" name="Gaia Bangle" value="synthed">
+        <label for="Gaia Bangle">Gaia Bangle</label><br>
+        <input type="checkbox" id="Titan Chain" name="Titan Chain" value="synthed">
+        <label for="Titan Chain">Titan Chain</label><br>
+        <input type="checkbox" id="Mythril" name="Mythril" value="synthed">
+        <label for="Mythril">Mythril</label><br>
+        <input type="checkbox" id="Elixir" name="Elixir" value="synthed">
+        <label for="Elixir">Elixir</label><br>
+        <input type="checkbox" id="Defense Up" name="Defense Up" value="synthed">
+        <label for="Defense Up">Defense Up</label><br>
+        <input type="checkbox" id="Heartguard" name="Heartguard" value="synthed">
+        <label for="Heartguard">Heartguard</label><br>
+        <input type="checkbox" id="Three Stars" name="Three Stars" value="synthed">
+        <label for="Three Stars">Three Stars</label><br>
+        <input type="checkbox" id="Altas Armlet" name="Altas Armlet" value="synthed">
+        <label for="Altas Armlet">Altas Armlet</label><br>
+        <input type="checkbox" id="Crystal Crown" name="Crystal Crown" value="synthed">
+        <label for="Crystal Crown">Crystal Crown</label><br>
+        <input type="checkbox" id="Dark Matter" name="Dark Matter" value="synthed">
+        <label for="Dark Matter">Dark Matter</label><br>
+        <input type="checkbox" id="Megalixer" name="Megalixer" value="synthed">
+        <label for="Megalixer">Megalixer</label><br>
+        <input type="checkbox" id="Power Up" name="Power Up" value="synthed">
+        <label for="Power Up">Power Up</label><br>
+        <input type="checkbox" id="Cosmic Arts" name="Cosmic Arts" value="synthed">
+        <label for="Cosmic Arts">Cosmic Arts</label><br>
+        <input type="checkbox" id="EXP Bracelet" name="EXP Bracelet" value="synthed">
+        <label for="EXP Bracelet">EXP Bracelet</label><br>
+        <input type="checkbox" id="Ribbon" name="Ribbon" value="synthed">
+        <label for="Ribbon">Ribbon</label><br>
+        <input type="checkbox" id="Fantasista" name="Fantasista" value="synthed">
+        <label for="Fantasista">Fantasista</label><br>
+        <input type="checkbox" id="Seven Elements" name="Seven Elements" value="synthed">
+        <label for="Seven Elements">Seven Elements</label><br>
+        <input type="checkbox" id="Ultima Weapon" name="Ultima Weapon" value="synthed">
+        <label for="Ultima Weapon">Ultima Weapon</label><br>
+        <input type="submit" value="Submit"></input>
+    </form>
+</div>
+<script src="js/app.js"></script>
 </body>
 
 </html>
