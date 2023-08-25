@@ -5,7 +5,11 @@ addEventListener("submit", (event) => {
   event.preventDefault();
   let recipeForm = event.target
   let completedRecipes = getCheckedBoxes(recipeForm)
-  console.log("completedRecipes: ",completedRecipes)
+  let consumedIngredients = []
+  for(let completedRecipe = 0; completedRecipe < completedRecipes.length; completedRecipe++){
+    consumedIngredients.push(...getItemsFromRecipe(recipeListKH,completedRecipes[completedRecipe]))
+  }
+  console.log(consumedIngredients)
 });
 
 function getCheckedBoxes(formSubmit){
@@ -19,11 +23,14 @@ function getCheckedBoxes(formSubmit){
 }
 
 function getItemsFromRecipe(recipeList,recipeName){
-  
   const recipe = recipeList.find(({name}) => name ===recipeName)
-  
   return recipe.ingredients; 
 }
+
+//TODO:continue with logic to get remaining required based on form submit
+    //get all ingredients already used -- including that logic for dark matter or something
+    //subtract used ingredients from required totals
+    //return the remaining required in HTML table
 
 function generateRecipeFormHTML(recipeArray){
     const formContent = []
@@ -37,8 +44,4 @@ function generateRecipeFormHTML(recipeArray){
 formContent.push(`<input type="submit" value="Submit"></input>`)
 return formContent.join("")
 };
-
-//console.log(generateRecipeFormHTML(recipeListKH));
-//const recipe1 = (getItemsFromRecipe(requiredTotalsKH,recipeListKH,"Mega Potion"))
-// const recipe2 = (getItemsFromRecipe(requiredTotalsKH,recipeListKH,"AP Up"))
-// console.log([...recipe1,...recipe2])
+//TODO: change index.html to dynamically create the table
