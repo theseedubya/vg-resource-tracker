@@ -23,9 +23,34 @@ function getCheckedBoxes(formSubmit){
 }
 
 function getItemsFromRecipe(recipeList,recipeName){
-  const recipe = recipeList.find(({name}) => name ===recipeName)
+  const recipe = recipeList.find(({name}) => name === recipeName)
   return recipe.ingredients; 
 }
+
+function consolidateConsumedItems(consumedItems){
+  const consolidatedList = {}
+  //loop through full list of items and consolidate into unique pairs with qtys summed
+  for(let i = 0; i < consumedItems.length; i++){
+    let entry = consumedItems[i];
+    let name = entry.name;
+    let qty = entry.qty;
+
+    //if the item is already in the consolidated list then add the qty
+    if(consolidatedList[name]){
+      consolidatedList[name] += qty;
+    }
+    //otherwise add an entry to the consolidated list with the qty on the current entry
+    else {
+      consolidatedList[name] = qty;
+    }
+  };
+  //transform consolidated list back to array of objects format
+  const consolidatedArray = []
+  for(const [key, value] of Object.entries(consolidatedList)){
+   consolidatedArray.push({"name":key,"qty":value});
+  };
+  return consolidatedArray;
+};
 
 //TODO:continue with logic to get remaining required based on form submit
     //get all ingredients already used -- including that logic for dark matter or something
