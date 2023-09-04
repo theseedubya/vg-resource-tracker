@@ -1,3 +1,4 @@
+//TODO: First hand research into these totals as the 3rd party advice on the number of Dark Matters required to be synthed is conflicting so this data may also be inaccurate.
 export const recipeListKH = [
     {
         "name": "Mega Potion",
