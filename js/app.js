@@ -9,7 +9,9 @@ addEventListener("submit", (event) => {
   for(let completedRecipe = 0; completedRecipe < completedRecipes.length; completedRecipe++){
     consumedIngredients.push(...getItemsFromRecipe(recipeListKH,completedRecipes[completedRecipe]))
   }
-  console.log(consumedIngredients)
+  let consumedTotals = consolidateConsumedItems(consumedIngredients);
+  console.log(consumedTotals)
+  return true
 });
 
 function getCheckedBoxes(formSubmit){
