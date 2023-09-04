@@ -1,29 +1,34 @@
 import { requiredTotalsKH } from "./requiredTotalsKH.js";
 import { recipeListKH } from "./recipeListKH.js";
-import { getCheckedBoxes, getItemsFromRecipe, subtractFromRequired, consolidateConsumedItems } from "./utils.js";
+import { getCheckedBoxes, getItemsFromRecipe, subtractFromRequired, consolidateConsumedItems, populateTable } from "./utils.js";
 
 addEventListener("submit", (event) => {
   event.preventDefault();
+  
+  //extract form data
   let recipeForm = event.target
   let completedRecipes = getCheckedBoxes(recipeForm)
+  
+  //get ingredients from recipes
   let consumedIngredients = []
   for (let completedRecipe = 0; completedRecipe < completedRecipes.length; completedRecipe++) {
     consumedIngredients.push(...getItemsFromRecipe(recipeListKH, completedRecipes[completedRecipe]))
   }
-  let consumedTotals = consolidateConsumedItems(consumedIngredients);
+
+  //calculate remaining items required
+  //let consumedTotals = consolidateConsumedItems(consumedIngredients);
   let remainingRequired = subtractFromRequired(consumedIngredients, requiredTotalsKH);
   console.log("remainingRequired", remainingRequired);
+
+  //generate html for remaining table
+  const remainingTable = document.querySelector(".remaining-table");
+  populateTable(remainingTable, remainingRequired);
 
   //return a HTML table of the remaining required
   return true
 });
 
-//TODO:
-  //continue with logic to get remaining required based on form submit
-  //write function to to transform array of objects into HTML table
-  //add return of remaining required HTML table to event listener functions
-  //tidy up to remove duplicate code between consolidate and subtract functions
-
+//TODO: change index.html to dynamically create the form
 function generateRecipeFormHTML(recipeArray) {
   const formContent = []
   for (let i = 0; i < recipeArray.length; i++) {
@@ -36,4 +41,4 @@ function generateRecipeFormHTML(recipeArray) {
   formContent.push(`<input type="submit" value="Submit"></input>`)
   return formContent.join("")
 };
-//TODO: change index.html to dynamically create the table
+
