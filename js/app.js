@@ -10,18 +10,19 @@ addEventListener("submit", (event) => {
     consumedIngredients.push(...getItemsFromRecipe(recipeListKH,completedRecipes[completedRecipe]))
   }
   let consumedTotals = consolidateConsumedItems(consumedIngredients);
-  console.log(consumedTotals)
+  let remainingRequired = subtractFromRequired(consumedTotals,requiredTotalsKH);
+  console.log("remainingRequired",remainingRequired);
   return true
 });
 
 function getCheckedBoxes(formSubmit){
-  let synthed = []
+  let checkedBoxes = []
   for(let entry=0;entry< formSubmit.length;entry++){
   if(formSubmit[entry].checked) {
-      synthed.push(formSubmit[entry].name)
+      checkedBoxes.push(formSubmit[entry].name)
     }
    }
-  return synthed
+  return checkedBoxes
 }
 
 function getItemsFromRecipe(recipeList,recipeName){
@@ -54,10 +55,40 @@ function consolidateConsumedItems(consumedItems){
   return consolidatedArray;
 };
 
+function subtractFromRequired(itemsUsed,requiredTotals){
+  const remaining = {}
+  //loop through full list of items and consolidate into unique pairs with qtys summed
+  for(let i = 0; i < requiredTotals.length; i++){
+    let requiredEntry = requiredTotals[i];
+    let requiredName = requiredEntry.name;
+    let requiredQty = requiredEntry.qty;
+
+    //transform required totals to key value pairs
+    remaining[requiredName] = requiredQty;
+  };
+  
+  //loop through full list of items and consolidate into unique pairs with qtys summed
+  for(let j = 0; j < itemsUsed.length; j++){
+    let itemUsedEntry = itemsUsed[j];
+    let itemUsedName = itemUsedEntry.name;
+    let itemUsedQty = itemUsedEntry.qty;
+
+    //subtract the used items from the required totals
+    remaining[itemUsedName] -= itemUsedQty;  
+  };
+  
+  //transform consolidated list back to array of objects format
+  const remainingArray = []
+  for(const [key, value] of Object.entries(remaining)){
+   remainingArray.push({"name":key,"qty":value});
+  };
+  return remainingArray;
+
+}
+
 //TODO:continue with logic to get remaining required based on form submit
-    //get all ingredients already used -- including that logic for dark matter or something
-    //subtract used ingredients from required totals
     //return the remaining required in HTML table
+    //tidy up to remove duplicate code
 
 function generateRecipeFormHTML(recipeArray){
     const formContent = []
